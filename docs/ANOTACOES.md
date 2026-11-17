@@ -28,10 +28,13 @@ O `package-lock.json` é versionado para que a instalação seja reproduzível c
 
 A referência é a seção "Origem, autoria e evolução" do README, escrita pelo autor: projeto idealizado e conduzido por Wesley Martins; IA usada como apoio; a Lovable foi um ambiente usado para disponibilização e testes de uma versão, não a origem nem a autora do projeto; houve uma etapa inicial em Python, que não faz parte da stack atual.
 
+### 2026-11-17: biblioteca de planilhas
+
+Aprovada a troca do `xlsx` 0.18.5 (vulnerável) pela SheetJS 0.20.3, instalada da CDN oficial (`https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`), com integridade registrada no `package-lock.json`. Mesma API, sem mudanças no código. Alternativa não adotada: guardar o `.tgz` no repositório.
+
 ## Pendências de decisão
 
 - **Licença do projeto:** ainda não definida. Até lá, todos os direitos são reservados ao autor.
-- **Atualização do `xlsx`:** recomendação técnica apresentada em 17/11/2026 (SheetJS 0.20.3 da CDN oficial, mesma API, compatibilidade verificada). Aguardando aprovação.
 - **Modelo do Gemini:** confirmar a disponibilidade do `gemini-4-argon` ou torná-lo configurável.
 
 ## Ideias

@@ -95,6 +95,7 @@ React 19, TanStack Start/Router, Vite, TypeScript, Tailwind CSS 4, SheetJS (`xls
 
 - [Node.js](https://nodejs.org/) 20 ou superior (testado com Node 26) e npm.
 - Não é necessário banco de dados, conta em nuvem ou chave de API.
+- Acesso à internet durante o `npm install`: além do registro do npm, a biblioteca de planilhas (SheetJS) é baixada da CDN oficial `cdn.sheetjs.com`. Depois de instalada, a aplicação funciona sem internet (exceto a IA opcional e as fontes do Google).
 
 ### Comandos
 
@@ -140,7 +141,6 @@ Resumo das principais (lista completa em [Limitações](docs/LIMITACOES.md)):
 - O processamento roda na thread principal do navegador; arquivos grandes podem travar a página.
 - A estratégia **Aproximada** pode associar várias linhas de A à mesma linha de B e confundir códigos parecidos (`PED-1001` × `PED-1005`).
 - CSV em codificação diferente de UTF-8 (ex.: Windows-1252) pode exibir acentos incorretos.
-- A dependência `xlsx` 0.18.5 tem vulnerabilidades conhecidas. Abra apenas arquivos de origem confiável.
 
 ## Evoluções planejadas
 

@@ -8,7 +8,6 @@ Complexidade estimada: **P** = até meio dia · **M** = 1 a 3 dias · **G** = 1 
 
 | Item                                                                                                                       | Complexidade |
 | -------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Substituir `xlsx` 0.18.5 por versão corrigida da SheetJS (≥ 0.20)                                                          | M            |
 | Estratégia Aproximada 1:1 (sem reutilizar a mesma linha de B), desempate determinístico e aviso para chaves do tipo código | M            |
 | Preservar chaves e campos ao trocar aba ou "pular linhas"; marcar o resultado como desatualizado                           | P            |
 

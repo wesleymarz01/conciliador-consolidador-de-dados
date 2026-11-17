@@ -7,6 +7,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ### Segurança
 
+- Biblioteca de planilhas atualizada de `xlsx` 0.18.5 para SheetJS 0.20.3 (CDN oficial), corrigindo as vulnerabilidades de _prototype pollution_ (GHSA-4r6h-8v6p-xvw6) e _ReDoS_ (GHSA-5pgg-2g8v-p4x9). Mesma API, sem mudança de comportamento; 2 testes novos de leitura de `.xlsx`/`.xls` com formatos de célula.
 - Exportação CSV protegida contra injeção de fórmulas (CSV injection): valores e cabeçalhos iniciados por `=`, `+`, `-`, `@`, tabulação ou retorno de carro recebem um apóstrofo no início. Números simples (`-10`, `+5`) são preservados. 14 testes automatizados novos.
 
 ## [0.1.0] - 2026-11-17
