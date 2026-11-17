@@ -160,9 +160,15 @@ As possibilidades de evolução estão em [ROADMAP](docs/ROADMAP.md). **Nenhum i
 | [Diário de Desenvolvimento](docs/DIARIO-DE-DESENVOLVIMENTO.md) | Histórico das etapas                 |
 | [CHANGELOG](CHANGELOG.md)                                      | Registro de alterações               |
 
-## Origem e autoria
+## Origem, autoria e evolução
 
-Projeto de [@wesleymarz01](https://github.com/wesleymarz01). O protótipo foi criado com o Lovable; este repositório é uma base independente, sem vínculo operacional com o Lovable.
+Projeto idealizado e desenvolvido por [Wesley Martins (@wesleymarz01)](https://github.com/wesleymarz01).
+
+O desenvolvimento inicial do projeto aconteceu fora da Lovable e incluiu uma etapa em Python. Posteriormente, uma versão da aplicação foi disponibilizada no ambiente Lovable para permitir testes e o acesso de uma pessoa convidada. A utilização desse ambiente para disponibilização não representa a origem nem a autoria do projeto.
+
+A versão documentada neste repositório foi organizada como uma base independente. Sua implementação atual utiliza as tecnologias listadas na seção [Tecnologias](#tecnologias); Python faz parte do histórico de desenvolvimento, não da stack atual.
+
+Ferramentas de inteligência artificial foram utilizadas pontualmente como apoio em ajustes e integração, sem substituir a autoria e o trabalho de desenvolvimento do responsável pelo projeto.
 
 ## Licença
 
