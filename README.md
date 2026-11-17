@@ -161,7 +161,9 @@ As possibilidades de evolução estão em [ROADMAP](docs/ROADMAP.md). **Nenhum i
 
 ## Origem e autoria
 
-Projeto de [@wesleymarz01](https://github.com/wesleymarz01). O protótipo foi criado com o Lovable; este repositório é uma base independente, sem vínculo operacional com o Lovable.
+O Conciliador & Consolidador de Dados foi idealizado e é desenvolvido por **Wesley Martins** ([@wesleymarz01](https://github.com/wesleymarz01)).
+
+Ferramentas de inteligência artificial foram usadas pontualmente como apoio no desenvolvimento: a plataforma Lovable, para gerar o protótipo web, e assistentes de código, para revisão, testes e documentação. As decisões, os requisitos e a responsabilidade pelo projeto são do autor. Este repositório é independente e não tem vínculo operacional com nenhuma dessas ferramentas.
 
 ## Licença
 

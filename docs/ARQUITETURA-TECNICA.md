@@ -59,7 +59,7 @@ Servidor Node local (npm start) ou Vite (npm run dev)
 
 O `package.json` também declara dependências herdadas do modelo inicial (Radix UI, recharts, zod, react-hook-form, date-fns, entre outras) que **não são usadas pela tela atual**. Elas foram mantidas nesta etapa para não alterar o projeto; a remoção está registrada no roadmap.
 
-### Diferenças em relação ao protótipo do Lovable
+### Diferenças em relação ao protótipo inicial
 
 - O wrapper `@lovable.dev/vite-tanstack-config` foi substituído por uma configuração explícita do Vite com os mesmos plugins essenciais (Tailwind, caminhos do tsconfig, TanStack Start, React) e sem os plugins exclusivos do ambiente Lovable.
 - O build usa o preset **`node-server`** do Nitro (execução local com `npm start`) no lugar do preset de Cloudflare Workers.
@@ -93,14 +93,14 @@ Arquivo único com o componente `Index` (estado da tela) e os subcomponentes `Dr
 
 ## 6. Testes
 
-| Arquivo                                    | Cobre                                                                                                                     |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `src/lib/reconcile.test.ts`                | Casos básicos do motor (testes originais do protótipo)                                                                    |
-| `src/lib/reconcile.caracterizacao.test.ts` | Normalização, moeda, hostname, chaves compostas, duplicadas, sem chave e a regra "cada linha em exatamente uma categoria" |
-| `src/lib/files.test.ts`                    | Leitura de CSV (vírgula, ponto e vírgula, acentos, pular linhas) e de XLSX (abas, consolidação, aba inexistente)          |
-| `src/lib/export.test.ts`                   | Exportação CSV com BOM e união de colunas                                                                                 |
-| `src/lib/sample.test.ts`                   | Resultado de referência dos dados de exemplo (com snapshot)                                                               |
-| `src/test/app-routing.test.tsx`            | A rota `/` existe                                                                                                         |
+| Arquivo                                    | Cobre                                                                                                                       |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `src/lib/reconcile.test.ts`                | Casos básicos do motor (testes originais do protótipo)                                                                      |
+| `src/lib/reconcile.caracterizacao.test.ts` | Normalização, moeda, hostname, chaves compostas, duplicadas, sem chave e a regra "cada linha em exatamente uma categoria"   |
+| `src/lib/files.test.ts`                    | Leitura de CSV (vírgula, ponto e vírgula, acentos, pular linhas) e de XLSX (abas, consolidação, aba inexistente)            |
+| `src/lib/export.test.ts`                   | Exportação CSV com BOM, união de colunas e proteção contra injeção de fórmulas; valores com `=` gravados como texto no XLSX |
+| `src/lib/sample.test.ts`                   | Resultado de referência dos dados de exemplo (com snapshot)                                                                 |
+| `src/test/app-routing.test.tsx`            | A rota `/` existe                                                                                                           |
 
 **Convenções:**
 

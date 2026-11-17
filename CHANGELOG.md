@@ -11,7 +11,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [0.1.0] - 2026-11-17
 
-Primeira versão do repositório independente. O código parte do protótipo criado no Lovable, já com as correções de confiabilidade da Fase 0.
+Primeira versão do repositório independente. O código parte do protótipo web desenvolvido por Wesley Martins (com apoio pontual da plataforma Lovable), já com as correções de confiabilidade da Fase 0.
 
 ### Funcionalidades existentes nesta versão
 

@@ -42,7 +42,7 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 - **Proteção de fórmulas no CSV:** valores de risco recebem um apóstrofo no início (`'=1+1`). O apóstrofo fica visível na célula ao abrir no Excel; o valor original pode ser recuperado removendo esse primeiro caractere.
 - **[M13] IA:** os dados de amostra são enviados ao Google sem pré-visualização nem confirmação a cada envio. O modelo `gemini-4-argon` não foi validado nesta etapa.
 - **[M14] Chave de API:** fica em texto puro no `localStorage` do navegador.
-- As dependências de desenvolvimento `vite` 8.1.5 e `zod` aparecem no `npm audit` (o `zod` não é usado pelo código).
+- O `npm audit` também aponta alertas em `vite` 8.1.5 (servidor de desenvolvimento), em `picomatch` (usado pelas ferramentas de build do TanStack, não pelo navegador) e em `zod` (declarado, mas não usado pelo código). Nenhum deles processa as planilhas do usuário; as atualizações ficam para uma etapa própria.
 
 ## Funcionalidades que não existem
 
