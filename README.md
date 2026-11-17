@@ -162,13 +162,15 @@ As possibilidades de evolução estão em [ROADMAP](docs/ROADMAP.md). **Nenhum i
 
 ## Origem, autoria e evolução
 
-Projeto idealizado e desenvolvido por [Wesley Martins (@wesleymarz01)](https://github.com/wesleymarz01).
+O Conciliador & Consolidador de Dados foi idealizado e conduzido por [Wesley Martins (@wesleymarz01)](https://github.com/wesleymarz01). Seu desenvolvimento começou em um ambiente privado, antes da decisão de disponibilizar publicamente uma versão independente.
 
-O desenvolvimento inicial do projeto aconteceu fora da Lovable e incluiu uma etapa em Python. Posteriormente, uma versão da aplicação foi disponibilizada no ambiente Lovable para permitir testes e o acesso de uma pessoa convidada. A utilização desse ambiente para disponibilização não representa a origem nem a autoria do projeto.
+Ao longo do processo, ferramentas de inteligência artificial foram utilizadas como apoio em diferentes etapas, incluindo análise do código, orientação técnica, desenvolvimento, revisão e documentação. Esse uso é parte transparente do processo de trabalho; a concepção do projeto, as decisões e a condução do desenvolvimento são de seu autor.
 
-A versão documentada neste repositório foi organizada como uma base independente. Sua implementação atual utiliza as tecnologias listadas na seção [Tecnologias](#tecnologias); Python faz parte do histórico de desenvolvimento, não da stack atual.
+Uma versão também passou pelo ambiente Lovable, que teve um papel importante na evolução, disponibilização e realização de testes com usuários. A Lovable foi uma ferramenta e um ambiente utilizado durante o percurso, não a origem ou a autora do projeto.
 
-Ferramentas de inteligência artificial foram utilizadas pontualmente como apoio em ajustes e integração, sem substituir a autoria e o trabalho de desenvolvimento do responsável pelo projeto.
+Em 17/11/2026, foi publicado este repositório público independente. Ele parte de uma versão consolidada durante o desenvolvimento privado e inclui adaptações para execução local, independência operacional do ambiente Lovable e documentação própria. O repositório privado foi mantido separado e não é substituído por esta publicação; as duas versões não devem ser consideradas automaticamente sincronizadas ou idênticas.
+
+O desenvolvimento inicial também incluiu uma etapa em Python. Python, porém, não faz parte da stack da versão atual, que utiliza as tecnologias listadas em [Tecnologias](#tecnologias).
 
 ## Licença
 
