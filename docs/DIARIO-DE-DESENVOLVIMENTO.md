@@ -1,87 +1,247 @@
 # Diário de Desenvolvimento
 
-Histórico das etapas do projeto. **Registre apenas o que pode ser comprovado** (commits, testes, resultados de execução). Formato de cada entrada: data, objetivo, alterações, testes e resultados.
+Registro cronológico da evolução técnica do projeto, contemplando decisões de desenvolvimento, implementações, correções, testes e resultados obtidos em cada etapa.
+
+Este documento tem como objetivo preservar o histórico do desenvolvimento, facilitar a rastreabilidade das alterações e registrar a evolução do projeto com base nas evidências técnicas disponíveis, incluindo código-fonte, commits, testes e resultados de execução.
 
 ---
 
-## 2026-10-16 a 2026-11-11: evolução inicial e disponibilização para testes
+## 2026-10-16 a 2026-11-11 — Desenvolvimento inicial e disponibilização para testes
 
-**Contexto de autoria:** conforme o histórico do projeto informado pelo autor, a ideia e o desenvolvimento inicial aconteceram fora da Lovable, incluindo uma etapa em Python. Em momento posterior, uma versão foi disponibilizada no ambiente Lovable para testes e para que uma pessoa convidada pudesse utilizá-la. Portanto, a Lovable foi um ambiente de disponibilização/teste de uma versão, não a origem ou a autora do projeto.
+### Contexto do projeto
 
-**Fonte dos registros técnicos abaixo:** histórico Git da versão que passou pelo ambiente Lovable (37 commits, quase todos com autoria técnica atribuída ao Lovable). Esses metadados descrevem a atividade registrada naquele repositório e não definem, por si só, a autoria ou a origem do projeto.
+A ideia e o desenvolvimento inicial do projeto antecederam sua utilização na plataforma Lovable. A concepção original envolveu uma etapa de desenvolvimento em Python, seguida pela evolução da aplicação em outro ambiente.
 
-- **2026-10-16:** o histórico dessa versão registra a criação a partir do modelo `tanstack_start_ts` disponibilizado no ambiente Lovable.
-- **2026-10-21:** 34 commits no mesmo dia. Entre as mensagens que descrevem o trabalho: "Criou sistema de conciliação", "Wireou modal Gemini", "Testou fluxo completo", "Ativou modos cruzamento", "Adicionou 4 melhorias ao app" e "Implementou troca de ambientes". Os demais commits têm a mensagem genérica "Changes".
-- **2026-11-11:** "Atualiza README profissional e reforça .gitignore para arquivos .env" e "Add project north star".
+Posteriormente, uma versão do projeto foi disponibilizada na Lovable para testes e utilização por uma pessoa convidada.
 
-**Resultado:** aplicação funcional com cruzamento exato e aproximado, modos Inventário e Auditoria, exportação, integração opcional com Gemini e 8 testes automatizados.
+A plataforma Lovable participou dessa etapa como ambiente de desenvolvimento e disponibilização de uma versão da aplicação, dentro de uma trajetória de desenvolvimento que já havia sido iniciada anteriormente.
 
----
+### Histórico técnico registrado
 
-## 2026-11-17: auditoria técnica
+A versão que passou pelo ambiente Lovable possui um histórico Git com 37 commits. Os registros abaixo descrevem as alterações documentadas nesse repositório.
 
-**Objetivo:** entender o projeto antes de qualquer mudança.
+- **2026-10-16:** registro de criação da versão a partir do modelo `tanstack_start_ts`, disponibilizado no ambiente Lovable.
+- **2026-10-21:** concentração de 34 commits no mesmo dia. Entre as mensagens registradas estão: "Criou sistema de conciliação", "Wireou modal Gemini", "Testou fluxo completo", "Ativou modos cruzamento", "Adicionou 4 melhorias ao app" e "Implementou troca de ambientes". Os demais commits apresentam a mensagem genérica "Changes".
+- **2026-11-11:** registros de atualização do README, reforço do `.gitignore` para arquivos `.env` e inclusão do documento "project north star".
 
-**O que foi feito:** leitura integral do código próprio, execução de testes, typecheck, lint, build, `npm audit` e testes práticos do motor com casos-limite e medição de desempenho.
+Os metadados de autoria dos commits descrevem os registros técnicos daquele repositório e devem ser interpretados dentro do contexto de utilização da plataforma.
 
-**Resultados:**
+### Resultado da etapa
 
-- 8/8 testes passando, typecheck sem erros, build OK.
-- O lint falhava por formatação (182 erros do Prettier).
-- Problemas confirmados por execução:
-  - "Ignorar domínio" truncava CPF, CNPJ e e-mail (falsos positivos);
-  - duplicatas e chaves vazias eram tratadas em silêncio;
-  - `R$` não era reconhecido com "Ignorar maiúsculas";
-  - o CSV exportado perdia colunas;
-  - a estratégia Aproximada não tinha exclusividade e era lenta;
-  - a dependência `xlsx` é vulnerável.
-- Desempenho medido: modo exato com 200 mil × 200 mil linhas em ~0,35 s; modo aproximado com 1.000 × 2.000 linhas em ~6,4 s.
+A versão disponibilizada apresentava:
+
+- Cruzamento exato e aproximado de dados.
+- Modos Inventário e Auditoria.
+- Exportação de resultados.
+- Integração opcional com Gemini.
+- 8 testes automatizados.
 
 ---
 
-## 2026-11-17: Fase 0, correções de confiabilidade
+## 2026-11-17 — Auditoria técnica do projeto
 
-**Objetivo:** corrigir os problemas que geravam números errados sem aviso.
+### Objetivo
 
-**O que foi feito** (num repositório privado de desenvolvimento, em commits separados):
+Realizar uma análise técnica abrangente da aplicação antes de iniciar novas alterações, identificando problemas de confiabilidade, desempenho, estrutura e manutenção.
 
-- Formatação Prettier (lint passou de 182 erros para 0), CI e testes de caracterização.
-- **C1:** "Ignorar domínio" passou a valer só para valores com formato de hostname.
-- **A1:** `R$` reconhecido também com "Ignorar maiúsculas".
-- **A2:** exportação e tabela com todas as colunas.
-- **C2:** duplicatas e linhas sem chave separadas em abas próprias, com aviso.
+### Atividades realizadas
 
-**Testes:** de 8 para 48 testes automatizados, todos passando. O resultado de referência dos dados de exemplo ficou inalterado (40 idênticos, 10 divergentes, 4 só em A, 6 só em B). Verificação manual no navegador com planilhas fictícias. CI verde em todas as branches.
+- Leitura integral do código-fonte próprio.
+- Execução da suíte de testes automatizados.
+- Verificação de TypeScript (typecheck).
+- Análise de lint e formatação.
+- Compilação da aplicação (build).
+- Verificação de dependências com `npm audit`.
+- Testes práticos do motor de conciliação com casos-limite.
+- Medições de desempenho com diferentes volumes de dados.
+
+### Resultados identificados
+
+- 8/8 testes automatizados aprovados.
+- Typecheck sem erros.
+- Build concluído com sucesso.
+- Lint apresentou 182 ocorrências relacionadas à formatação pelo Prettier.
+
+### Problemas identificados e reproduzidos
+
+1. A opção "Ignorar domínio" podia truncar CPF, CNPJ e e-mail, provocando falsos positivos.
+2. Duplicatas e chaves vazias eram tratadas silenciosamente.
+3. O símbolo `R$` não era reconhecido corretamente com a opção "Ignorar maiúsculas".
+4. O CSV exportado não preservava todas as colunas.
+5. A estratégia Aproximada não garantia exclusividade nos cruzamentos e apresentava desempenho insatisfatório.
+6. A dependência `xlsx` apresentava vulnerabilidade identificada na análise de segurança.
+
+### Desempenho medido
+
+- **Modo Exato:** 200 mil × 200 mil linhas processadas em aproximadamente 0,35 segundo.
+- **Modo Aproximado:** 1.000 × 2.000 linhas processadas em aproximadamente 6,4 segundos.
+
+Os resultados serviram como referência para definir as prioridades da primeira fase de correções.
 
 ---
 
-## 2026-11-17: criação deste repositório público independente
+## 2026-11-17 — Fase 0: correções de confiabilidade
 
-**Objetivo:** dar ao projeto uma identidade própria, executável localmente e sem dependência operacional do Lovable, com documentação completa.
+### Objetivo
 
-**O que foi feito:**
+Corrigir problemas que poderiam comprometer a precisão dos resultados ou ocultar inconsistências durante o processo de conciliação.
 
-- Código copiado do estado final da Fase 0, **sem o histórico Git anterior**.
-- Varredura de segredos: nenhuma chave, token, `.env` ou dado real encontrado. Os CPFs e o e-mail presentes nos testes são fictícios.
-- **Não copiados:** pasta `.lovable/`, `bun.lock`, `bunfig.toml`, `src/lib/lovable-error-reporting.ts` (telemetria do editor Lovable) e documentos internos da fase anterior.
-- `vite.config.ts` reescrito sem `@lovable.dev/vite-tanstack-config`, usando apenas plugins já presentes (Tailwind, tsconfig-paths, TanStack Start, React) e Nitro com preset `node-server`.
-- Removidas, em `__root.tsx`, a chamada de telemetria do Lovable e a meta `twitter:site @Lovable`.
-- `package.json`: nome do projeto, versão 0.1.0, scripts `start` e `typecheck`, `engines` (Node ≥ 20). Gerenciador passa a ser npm (`package-lock.json`).
-- Nenhuma mudança na lógica da aplicação.
-- Documentação criada: README, `docs/` (funcional, guia do usuário, arquitetura, limitações, roadmap, anotações, diário), CHANGELOG e AGENTS.
+### Implementações realizadas
 
-**Testes e resultados** (Node 26.13.1, Windows):
+As correções foram desenvolvidas em um repositório privado de desenvolvimento, com commits separados para facilitar o acompanhamento das alterações.
 
-- `npm test`: 48/48 testes passando.
-- `npm run typecheck`: sem erros.
-- `npm run lint`: 0 erros (6 avisos em componentes de UI herdados).
-- `npm run build`: OK, saída em `.output/` (preset `node-server`).
-- `npm start`: a página carregou no navegador. Fluxo com os dados de exemplo no modo Auditoria: 40 / 10 / 4 / 6, igual à referência. Visual conferido por captura de tela.
-- `npm run dev`: servidor respondeu HTTP 200 em `http://localhost:8080`.
-- CI no GitHub Actions (Node 22, `npm ci`): typecheck, lint, testes e build com sucesso no primeiro push.
+- **Infraestrutura e qualidade:** aplicação da formatação Prettier, configuração de CI e criação de testes de caracterização.
+- **C1 — Ignorar domínio:** a funcionalidade passou a ser aplicada somente a valores que apresentam formato de hostname.
+- **A1 — Reconhecimento de moeda:** o símbolo `R$` passou a ser reconhecido também com a opção "Ignorar maiúsculas".
+- **A2 — Exportação:** correção da exportação e da tabela para preservar todas as colunas.
+- **C2 — Integridade dos dados:** duplicatas e linhas sem chave passaram a ser identificadas separadamente, com apresentação em abas próprias e avisos ao usuário.
 
-**Organização no GitHub:**
+### Testes e validações
 
-- Labels criadas: `documentação`, `melhoria`, `nova funcionalidade`, `segurança` e `desempenho` (a label `bug` já existia).
-- Issues #1 a #17 abertas a partir das limitações documentadas em `docs/LIMITACOES.md`, todas conferidas no código. Nenhuma marcada como concluída.
-- **GitHub Projects não criado:** a credencial disponível não tem o escopo `project` (erro `INSUFFICIENT_SCOPES` da API). Fica pendente.
+- Evolução de 8 para 48 testes automatizados.
+- Todos os 48 testes aprovados.
+- Formatação: redução de 182 ocorrências para zero.
+- CI executada com sucesso em todas as branches verificadas.
+
+O resultado de referência dos dados de exemplo permaneceu inalterado:
+
+| Resultado | Quantidade |
+|---|---:|
+| Idênticos | 40 |
+| Divergentes | 10 |
+| Somente em A | 4 |
+| Somente em B | 6 |
+
+Também foi realizada verificação manual no navegador, utilizando planilhas fictícias.
+
+---
+
+## 2026-11-17 — Criação do repositório público independente
+
+### Objetivo
+
+Estabelecer uma estrutura própria para o projeto, permitindo sua execução local, manutenção independente do ambiente Lovable e continuidade do desenvolvimento com documentação técnica organizada.
+
+### Preparação e organização do código
+
+O repositório público foi criado a partir do estado final da Fase 0.
+
+O código-fonte foi transferido sem incorporar o histórico Git anterior, estabelecendo um novo histórico independente para esta etapa de desenvolvimento.
+
+### Segurança e limpeza do projeto
+
+Foi realizada uma varredura de arquivos e informações sensíveis.
+
+- Nenhuma chave, token, arquivo `.env` ou dado real foi encontrado.
+- Os CPFs e o endereço de e-mail utilizados nos testes são fictícios.
+
+Não foram incorporados ao novo repositório:
+
+- Pasta `.lovable/`.
+- Arquivos `bun.lock` e `bunfig.toml`.
+- `src/lib/lovable-error-reporting.ts`, relacionado à telemetria do editor Lovable.
+- Documentos internos da etapa anterior.
+
+### Independência de infraestrutura
+
+O arquivo `vite.config.ts` foi reescrito para remover a dependência de `@lovable.dev/vite-tanstack-config`.
+
+A configuração passou a utilizar os plugins já presentes no projeto:
+
+- Tailwind.
+- tsconfig-paths.
+- TanStack Start.
+- React.
+- Nitro com preset `node-server`.
+
+Também foram realizadas as seguintes alterações:
+
+- Remoção da chamada de telemetria da Lovable em `__root.tsx`.
+- Remoção da meta `twitter:site @Lovable`.
+- Atualização do `package.json` com o nome do projeto e versão `0.1.0`.
+- Inclusão dos scripts `start` e `typecheck`.
+- Definição de `engines` com Node ≥ 20.
+- Adoção do npm como gerenciador de pacotes, utilizando `package-lock.json`.
+
+**Importante:** nenhuma alteração foi realizada na lógica funcional da aplicação durante essa etapa de independência.
+
+### Documentação criada
+
+Foi estruturada a documentação do projeto, contemplando:
+
+- README.
+- Documentação funcional.
+- Guia do usuário.
+- Arquitetura.
+- Limitações conhecidas.
+- Roadmap.
+- Anotações técnicas.
+- Diário de desenvolvimento.
+- CHANGELOG.
+- AGENTS.
+
+### Testes e resultados
+
+Ambiente utilizado: Node 26.13.1, Windows.
+
+| Verificação | Resultado |
+|---|---|
+| `npm test` | 48/48 testes aprovados |
+| `npm run typecheck` | Sem erros |
+| `npm run lint` | 0 erros e 6 avisos em componentes de UI herdados |
+| `npm run build` | Concluído com sucesso |
+| `npm start` | Aplicação carregada no navegador |
+| `npm run dev` | Servidor respondeu HTTP 200 |
+
+A compilação gerou a saída em `.output/`, utilizando o preset `node-server`.
+
+### Validação funcional
+
+Foi executado um teste com os dados de exemplo no modo Auditoria.
+
+Os resultados permaneceram consistentes com a referência:
+
+- 40 registros idênticos.
+- 10 registros divergentes.
+- 4 registros somente em A.
+- 6 registros somente em B.
+
+A interface também foi conferida visualmente por meio de captura de tela.
+
+### Integração contínua
+
+A pipeline do GitHub Actions foi executada com Node 22 e `npm ci`.
+
+As etapas de typecheck, lint, testes e build foram concluídas com sucesso no primeiro push.
+
+### Organização do GitHub
+
+Foram criadas as seguintes labels:
+
+- `documentação`
+- `melhoria`
+- `nova funcionalidade`
+- `segurança`
+- `desempenho`
+
+A label `bug` já existia no repositório.
+
+Também foram abertas as Issues #1 a #17, com base nas limitações documentadas em `docs/LIMITACOES.md`.
+
+Todas foram conferidas diretamente no código e nenhuma foi marcada como concluída.
+
+### Pendência: GitHub Projects
+
+A criação do quadro GitHub Projects não foi concluída nesta etapa.
+
+A credencial disponível não possui o escopo `project`, resultando no erro `INSUFFICIENT_SCOPES` durante a solicitação à API.
+
+A configuração permanece pendente para uma etapa posterior.
+
+---
+
+## Continuidade do desenvolvimento
+
+O projeto passa a contar com um repositório público independente, documentação técnica estruturada, testes automatizados e integração contínua.
+
+As próximas etapas deverão considerar as limitações já identificadas, as Issues abertas e o roadmap técnico, mantendo o compromisso com a confiabilidade dos resultados, a rastreabilidade das alterações e a evolução sustentável da aplicação.
