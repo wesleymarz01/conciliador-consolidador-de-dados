@@ -31,7 +31,7 @@ Primeira versão do repositório independente. O código parte do protótipo cri
 - Exportação CSV/XLSX e tabela incluem todas as colunas, não só as da primeira linha.
 - Duplicatas e chaves vazias deixaram de ser tratadas em silêncio: vale a 1ª ocorrência, e as demais linhas aparecem em abas próprias. A cobertura do Inventário passa a ser calculada sobre as chaves únicas de A.
 
-### Alterado (independência do Lovable)
+### Alterado (independência operacional do ambiente Lovable)
 
 - `vite.config.ts` reescrito sem `@lovable.dev/vite-tanstack-config`. O build usa Nitro com preset `node-server` (`npm start`).
 - Removidos a telemetria do editor Lovable, a meta `twitter:site @Lovable`, a pasta `.lovable/` e os arquivos do bun.

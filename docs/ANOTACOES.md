@@ -24,10 +24,14 @@ A configuração do Lovable foi substituída por uma configuração explícita d
 
 O `package-lock.json` é versionado para que a instalação seja reproduzível com Node e npm, sem ferramentas adicionais.
 
+### 2026-11-17: autoria e origem
+
+A referência é a seção "Origem, autoria e evolução" do README, escrita pelo autor: projeto idealizado e conduzido por Wesley Martins; IA usada como apoio; a Lovable foi um ambiente usado para disponibilização e testes de uma versão, não a origem nem a autora do projeto; houve uma etapa inicial em Python, que não faz parte da stack atual.
+
 ## Pendências de decisão
 
 - **Licença do projeto:** ainda não definida. Até lá, todos os direitos são reservados ao autor.
-- **Substituto do `xlsx`:** SheetJS ≥ 0.20 (mesma API) ou outra biblioteca.
+- **Atualização do `xlsx`:** recomendação técnica apresentada em 17/11/2026 (SheetJS 0.20.3 da CDN oficial, mesma API, compatibilidade verificada). Aguardando aprovação.
 - **Modelo do Gemini:** confirmar a disponibilidade do `gemini-4-argon` ou torná-lo configurável.
 
 ## Ideias
