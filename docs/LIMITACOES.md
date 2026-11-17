@@ -39,7 +39,7 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 ## Segurança
 
 - **[A4] `xlsx` 0.18.5** (versão do npm) tem vulnerabilidades conhecidas de _prototype pollution_ e _ReDoS_ (GHSA-4r6h-8v6p-xvw6, GHSA-5pgg-2g8v-p4x9). Abra apenas arquivos de origem confiável.
-- **[M7] Injeção de fórmula:** o CSV exportado não neutraliza valores iniciados por `=`, `+`, `-` ou `@`.
+- **Proteção de fórmulas no CSV:** valores de risco recebem um apóstrofo no início (`'=1+1`). O apóstrofo fica visível na célula ao abrir no Excel; o valor original pode ser recuperado removendo esse primeiro caractere.
 - **[M13] IA:** os dados de amostra são enviados ao Google sem pré-visualização nem confirmação a cada envio. O modelo `gemini-4-argon` não foi validado nesta etapa.
 - **[M14] Chave de API:** fica em texto puro no `localStorage` do navegador.
 - As dependências de desenvolvimento `vite` 8.1.5 e `zod` aparecem no `npm audit` (o `zod` não é usado pelo código).

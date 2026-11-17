@@ -128,7 +128,7 @@ npm run dev          # ambiente de desenvolvimento em http://localhost:8080
 - Filtro de texto nos resultados.
 - Inversão das planilhas A ↔ B.
 - Nomes personalizados para as planilhas (modo Inventário).
-- Exportação da aba atual (já filtrada) em `.xlsx` ou `.csv` (UTF-8 com BOM).
+- Exportação da aba atual (já filtrada) em `.xlsx` ou `.csv` (UTF-8 com BOM), com proteção contra fórmulas maliciosas no CSV.
 - Assistência opcional com Gemini (sugestão de mapeamento e diagnóstico).
 - Dados de exemplo fictícios.
 
@@ -141,7 +141,6 @@ Resumo das principais (lista completa em [Limitações](docs/LIMITACOES.md)):
 - A estratégia **Aproximada** pode associar várias linhas de A à mesma linha de B e confundir códigos parecidos (`PED-1001` × `PED-1005`).
 - CSV em codificação diferente de UTF-8 (ex.: Windows-1252) pode exibir acentos incorretos.
 - A dependência `xlsx` 0.18.5 tem vulnerabilidades conhecidas. Abra apenas arquivos de origem confiável.
-- O CSV exportado não neutraliza valores iniciados por `=`, `+`, `-` ou `@` (risco de fórmula ao abrir no Excel).
 
 ## Evoluções planejadas
 

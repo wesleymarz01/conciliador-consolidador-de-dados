@@ -97,6 +97,7 @@ Nos dois modos, as abas _Duplicadas em A/B_ e _Sem chave em A/B_ aparecem quando
 - **Filtro:** busca o texto digitado em todas as colunas da aba atual, sem diferenciar maiúsculas.
 - **Tabela:** mostra até 300 linhas, com aviso quando há mais.
 - **Exportação:** gera `.xlsx` (aba "Resultado") ou `.csv` (UTF-8 com BOM) da aba atual **com o filtro aplicado**, com todas as linhas e todas as colunas presentes em qualquer linha. O arquivo se chama `conciliacao-<aba>`.
+- **Proteção contra fórmulas (CSV):** células e cabeçalhos que começam com `=`, `+`, `-`, `@`, tabulação ou retorno de carro (inclusive as variantes de largura total) recebem um apóstrofo no início, para que Excel e programas semelhantes não os executem como fórmula. Números simples como `-10`, `+5` e `-1.234,56` não são alterados. No `.xlsx`, esses valores já são gravados como texto.
 
 ## 8. Assistência com IA (opcional)
 

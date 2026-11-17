@@ -68,12 +68,22 @@ export async function parseFile(file: File, o: ParseOpts = {}): Promise<Sheet> {
   return { name: file.name, ...matrixToRows(read(sheet), skip), sheetNames: names, sheet, skip };
 }
 
-/** Uni\u00e3o ordenada das colunas de todas as linhas (ordem de primeira apari\u00e7\u00e3o). */
+/** União ordenada das colunas de todas as linhas (ordem de primeira aparição). */
 export function columnsOf(rows: Record<string, unknown>[]): string[] {
   const cols = new Set<string>();
   for (const r of rows) for (const c of Object.keys(r)) cols.add(c);
   return [...cols];
 }
+
+/**
+ * Valores que Excel e outros programas interpretariam como fórmula ao abrir um CSV
+ * (CSV/Formula Injection): começam com = + - @, tabulação ou retorno de carro, inclusive
+ * as variantes de largura total (＝ ＋ － ＠). Números simples como "-10" ou "+5" são
+ * exceção e ficam intactos. No CSV exportado, esses valores recebem um apóstrofo no
+ * início, como recomenda a OWASP.
+ */
+export const FORMULA_RISK =
+  /^(?![+-]?(?:\d[\d.,]*|[.,]\d+)(?:[eE][+-]?\d+)?$)[=+\-@\t\r\uFF1D\uFF0B\uFF0D\uFF20]/;
 
 export function exportRows(rows: Record<string, unknown>[], name: string, fmt: "xlsx" | "csv") {
   const columns = columnsOf(rows);
@@ -86,7 +96,8 @@ export function exportRows(rows: Record<string, unknown>[], name: string, fmt: "
     );
     XLSX.writeFile(wb, `${name}.xlsx`);
   } else {
-    const csv = Papa.unparse(rows, { columns });
+    // No XLSX, valores assim já são gravados como texto (não como fórmula) pelo SheetJS.
+    const csv = Papa.unparse(rows, { columns, escapeFormulae: FORMULA_RISK });
     const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
