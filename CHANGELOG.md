@@ -7,7 +7,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [0.1.0] - 2026-11-17
 
-Primeira versão do repositório independente. O código parte do protótipo criado no Lovable, já com as correções de confiabilidade da Fase 0.
+Primeira versão do repositório público independente. O código parte do estado consolidado durante o desenvolvimento privado, após uma etapa de evolução e testes no ambiente Lovable, e inclui as correções de confiabilidade da Fase 0.
 
 ### Funcionalidades existentes nesta versão
 
@@ -20,7 +20,7 @@ Primeira versão do repositório independente. O código parte do protótipo cri
 - Assistência opcional com Google Gemini (chave do usuário).
 - Dados de exemplo fictícios e 48 testes automatizados.
 
-### Corrigido (Fase 0, em relação ao protótipo)
+### Corrigido (Fase 0, em relação à versão anterior)
 
 - "Ignorar domínio" só altera valores com formato de hostname. Antes, CPF, CNPJ, e-mail e `IP:porta` eram truncados no primeiro ponto.
 - `R$` é reconhecido na comparação numérica também com "Ignorar maiúsculas" ligado.
