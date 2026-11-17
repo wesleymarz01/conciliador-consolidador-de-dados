@@ -5,6 +5,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [Não lançado]
 
+### Segurança
+
+- Exportação CSV protegida contra injeção de fórmulas (CSV injection): valores e cabeçalhos iniciados por `=`, `+`, `-`, `@`, tabulação ou retorno de carro recebem um apóstrofo no início. Números simples (`-10`, `+5`) são preservados. 14 testes automatizados novos.
+
 ## [0.1.0] - 2026-11-17
 
 Primeira versão do repositório independente. O código parte do protótipo criado no Lovable, já com as correções de confiabilidade da Fase 0.
