@@ -4,11 +4,13 @@ Histórico das etapas do projeto. **Registre apenas o que pode ser comprovado** 
 
 ---
 
-## 2026-10-16 a 2026-11-11: protótipo no Lovable
+## 2026-10-16 a 2026-11-11: evolução inicial e disponibilização para testes
 
-**Fonte:** histórico Git do repositório original do protótipo (37 commits, quase todos gerados pelo Lovable).
+**Contexto de autoria:** conforme o histórico do projeto informado pelo autor, a ideia e o desenvolvimento inicial aconteceram fora da Lovable, incluindo uma etapa em Python. Em momento posterior, uma versão foi disponibilizada no ambiente Lovable para testes e para que uma pessoa convidada pudesse utilizá-la. Portanto, a Lovable foi um ambiente de disponibilização/teste de uma versão, não a origem ou a autora do projeto.
 
-- **2026-10-16:** projeto criado a partir do modelo `tanstack_start_ts` do Lovable.
+**Fonte dos registros técnicos abaixo:** histórico Git da versão que passou pelo ambiente Lovable (37 commits, quase todos com autoria técnica atribuída ao Lovable). Esses metadados descrevem a atividade registrada naquele repositório e não definem, por si só, a autoria ou a origem do projeto.
+
+- **2026-10-16:** o histórico dessa versão registra a criação a partir do modelo `tanstack_start_ts` disponibilizado no ambiente Lovable.
 - **2026-10-21:** 34 commits no mesmo dia. Entre as mensagens que descrevem o trabalho: "Criou sistema de conciliação", "Wireou modal Gemini", "Testou fluxo completo", "Ativou modos cruzamento", "Adicionou 4 melhorias ao app" e "Implementou troca de ambientes". Os demais commits têm a mensagem genérica "Changes".
 - **2026-11-11:** "Atualiza README profissional e reforça .gitignore para arquivos .env" e "Add project north star".
 
