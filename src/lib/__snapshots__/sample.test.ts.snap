@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dados de exemplo (golden) > modo auditoria 1`] = `
+[
+  "ped-1007:Valor",
+  "ped-1011:Status",
+  "ped-1014:Valor",
+  "ped-1021:Valor",
+  "ped-1022:Status",
+  "ped-1028:Valor",
+  "ped-1035:Valor",
+  "ped-1042:Valor",
+  "ped-1044:Status",
+  "ped-1049:Valor",
+]
+`;
