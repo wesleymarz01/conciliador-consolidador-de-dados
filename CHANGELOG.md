@@ -7,7 +7,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [0.1.0] - 2026-11-17
 
-Primeira versão do repositório público independente. O código parte do estado consolidado durante o desenvolvimento privado, após uma etapa de evolução e testes no ambiente Lovable, e inclui as correções de confiabilidade da Fase 0.
+Primeira versão do repositório público independente. O projeto teve origem em um desenvolvimento privado, com versões iniciais em HTML e experimentações em Python, antes de passar por uma etapa de evolução e implementação com apoio da Lovable. A versão pública recebeu adaptações próprias para execução local e mantém histórico independente.
 
 ### Funcionalidades existentes nesta versão
 
