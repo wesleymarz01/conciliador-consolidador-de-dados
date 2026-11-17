@@ -74,6 +74,45 @@ describe("parseFile — XLSX", () => {
   });
 });
 
+describe("parseFile — formatos de célula e .xls (regressão da biblioteca xlsx)", () => {
+  // Planilha fictícia com formatos numéricos e de data, acentos e célula mesclada.
+  const sheet = () => {
+    const ws: XLSX.WorkSheet = { "!ref": "A1:D3" };
+    const put = (c: string, v: XLSX.CellObject) => (ws[c] = v);
+    ["Código", "Valor", "Data", "Pct"].forEach((h, i) =>
+      put(String.fromCharCode(65 + i) + "1", { t: "s", v: h }),
+    );
+    put("A2", { t: "s", v: "PED-1001" });
+    put("B2", { t: "n", v: 1234.5, z: "#,##0.00" });
+    put("C2", { t: "n", v: 45291, z: "dd/mm/yyyy" });
+    put("D2", { t: "n", v: 0.125, z: "0.0%" });
+    put("A3", { t: "s", v: "Ação ção" });
+    put("B3", { t: "n", v: -10 });
+    ws["!merges"] = [{ s: { r: 2, c: 2 }, e: { r: 2, c: 3 } }];
+    return ws;
+  };
+  const book = (bookType: XLSX.BookType, name: string) => {
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, sheet(), "Formatos");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([["id"], [1]]), "Segunda");
+    return new File([XLSX.write(wb, { type: "array", bookType }) as ArrayBuffer], name);
+  };
+  const esperado = [
+    { Código: "PED-1001", Valor: "1,234.50", Data: "31/12/2023", Pct: "12.5%" },
+    { Código: "Ação ção", Valor: "-10", Data: "", Pct: "" },
+  ];
+
+  it("lê .xlsx com valores formatados como aparecem no Excel", async () => {
+    const s = await parseFile(book("xlsx", "base.xlsx"));
+    expect(s.rows).toEqual(esperado);
+  });
+  it("lê .xls (BIFF8) com os mesmos valores e abas", async () => {
+    const s = await parseFile(book("biff8", "base.xls"));
+    expect(s.sheetNames).toEqual(["Formatos", "Segunda"]);
+    expect(s.rows).toEqual(esperado);
+  });
+});
+
 describe("matrixToRows", () => {
   it("nomeia cabeçalhos vazios e desduplica repetidos", () => {
     const r = matrixToRows([
