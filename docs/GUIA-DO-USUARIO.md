@@ -72,7 +72,7 @@ Não use a IA com dados confidenciais que não possam sair da sua máquina.
 
 - Com a aba desejada aberta (e o filtro, se quiser), clique em **Exportar .xlsx** ou **Exportar .csv**.
 - O arquivo tem todas as linhas da aba (respeitando o filtro) e todas as colunas.
-- Ao abrir CSVs exportados no Excel, desconfie de células que comecem com `=`, `+`, `-` ou `@` vindas de fontes desconhecidas.
+- No CSV, valores que o Excel executaria como fórmula (começando com `=`, `+`, `-` ou `@`, exceto números como `-10`) são gravados com um apóstrofo no início (ex.: `'=1+1`). Isso impede a execução da fórmula; o apóstrofo aparece na célula.
 
 ## Dúvidas comuns
 
