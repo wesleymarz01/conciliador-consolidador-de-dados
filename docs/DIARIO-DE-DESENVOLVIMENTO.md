@@ -1,87 +1,19 @@
 # Diário de Desenvolvimento
 
-Histórico das etapas do projeto. **Registre apenas o que pode ser comprovado** (commits, testes, resultados de execução). Formato de cada entrada: data, objetivo, alterações, testes e resultados.
+Diário de bordo do projeto, do mais antigo para o mais recente. Cada entrada traz a data, o que foi trabalhado e o resultado. Detalhes técnicos ficam no [CHANGELOG](../CHANGELOG.md) e nos commits. A origem e a autoria do projeto estão descritas no [README](../README.md#origem-autoria-e-evolução).
 
 ---
 
-## 2026-10-16 a 2026-11-11: evolução inicial e disponibilização para testes
+**Início (data não registrada)** — Idealização e desenvolvimento inicial por Wesley Martins, fora da Lovable, incluindo uma etapa em Python.
 
-**Contexto de autoria:** conforme o histórico do projeto informado pelo autor, a ideia e o desenvolvimento inicial aconteceram fora da Lovable, incluindo uma etapa em Python. Em momento posterior, uma versão foi disponibilizada no ambiente Lovable para testes e para que uma pessoa convidada pudesse utilizá-la. Portanto, a Lovable foi um ambiente de disponibilização/teste de uma versão, não a origem ou a autora do projeto.
+**16/10/2026 a 11/11/2026** — Uma versão foi disponibilizada no ambiente Lovable para testes e para uso por uma pessoa convidada. O histórico dessa versão registra o cruzamento de planilhas, os modos Inventário e Auditoria, a estratégia aproximada, a exportação, a integração opcional com o Gemini e os primeiros 8 testes automatizados (a maior parte em 21/10), além da revisão do README (11/11).
 
-**Fonte dos registros técnicos abaixo:** histórico Git da versão que passou pelo ambiente Lovable (37 commits, quase todos com autoria técnica atribuída ao Lovable). Esses metadados descrevem a atividade registrada naquele repositório e não definem, por si só, a autoria ou a origem do projeto.
+**17/11/2026** — Auditoria técnica completa. O fluxo principal funcionava, mas havia resultados incorretos em situações específicas (CPF tratado como hostname, linhas duplicadas, valores com `R$`, colunas faltando no CSV) e uma biblioteca com vulnerabilidades conhecidas.
 
-- **2026-10-16:** o histórico dessa versão registra a criação a partir do modelo `tanstack_start_ts` disponibilizado no ambiente Lovable.
-- **2026-10-21:** 34 commits no mesmo dia. Entre as mensagens que descrevem o trabalho: "Criou sistema de conciliação", "Wireou modal Gemini", "Testou fluxo completo", "Ativou modos cruzamento", "Adicionou 4 melhorias ao app" e "Implementou troca de ambientes". Os demais commits têm a mensagem genérica "Changes".
-- **2026-11-11:** "Atualiza README profissional e reforça .gitignore para arquivos .env" e "Add project north star".
+**17/11/2026** — Correções de confiabilidade no ambiente privado de desenvolvimento. Os quatro problemas que geravam números errados foram corrigidos, e os testes automatizados passaram de 8 para 48, todos aprovados.
 
-**Resultado:** aplicação funcional com cruzamento exato e aproximado, modos Inventário e Auditoria, exportação, integração opcional com Gemini e 8 testes automatizados.
+**17/11/2026** — Publicação deste repositório público e independente, que roda localmente com Node.js, sem depender operacionalmente do ambiente Lovable. Documentação completa, integração contínua no GitHub e 17 issues abertas para as melhorias conhecidas. Resultado: aplicação, testes e build funcionando.
 
----
+**17/11/2026** — Correção na exportação CSV. Foi implementada proteção contra fórmulas maliciosas, e 14 testes automatizados novos validam os casos de risco e a preservação de números, acentos e separadores. Resultado: 62 testes aprovados.
 
-## 2026-11-17: auditoria técnica
-
-**Objetivo:** entender o projeto antes de qualquer mudança.
-
-**O que foi feito:** leitura integral do código próprio, execução de testes, typecheck, lint, build, `npm audit` e testes práticos do motor com casos-limite e medição de desempenho.
-
-**Resultados:**
-
-- 8/8 testes passando, typecheck sem erros, build OK.
-- O lint falhava por formatação (182 erros do Prettier).
-- Problemas confirmados por execução:
-  - "Ignorar domínio" truncava CPF, CNPJ e e-mail (falsos positivos);
-  - duplicatas e chaves vazias eram tratadas em silêncio;
-  - `R$` não era reconhecido com "Ignorar maiúsculas";
-  - o CSV exportado perdia colunas;
-  - a estratégia Aproximada não tinha exclusividade e era lenta;
-  - a dependência `xlsx` é vulnerável.
-- Desempenho medido: modo exato com 200 mil × 200 mil linhas em ~0,35 s; modo aproximado com 1.000 × 2.000 linhas em ~6,4 s.
-
----
-
-## 2026-11-17: Fase 0, correções de confiabilidade
-
-**Objetivo:** corrigir os problemas que geravam números errados sem aviso.
-
-**O que foi feito** (num repositório privado de desenvolvimento, em commits separados):
-
-- Formatação Prettier (lint passou de 182 erros para 0), CI e testes de caracterização.
-- **C1:** "Ignorar domínio" passou a valer só para valores com formato de hostname.
-- **A1:** `R$` reconhecido também com "Ignorar maiúsculas".
-- **A2:** exportação e tabela com todas as colunas.
-- **C2:** duplicatas e linhas sem chave separadas em abas próprias, com aviso.
-
-**Testes:** de 8 para 48 testes automatizados, todos passando. O resultado de referência dos dados de exemplo ficou inalterado (40 idênticos, 10 divergentes, 4 só em A, 6 só em B). Verificação manual no navegador com planilhas fictícias. CI verde em todas as branches.
-
----
-
-## 2026-11-17: criação deste repositório público independente
-
-**Objetivo:** dar ao projeto uma identidade própria, executável localmente e sem dependência operacional do Lovable, com documentação completa.
-
-**O que foi feito:**
-
-- Código copiado do estado final da Fase 0, **sem o histórico Git anterior**.
-- Varredura de segredos: nenhuma chave, token, `.env` ou dado real encontrado. Os CPFs e o e-mail presentes nos testes são fictícios.
-- **Não copiados:** pasta `.lovable/`, `bun.lock`, `bunfig.toml`, `src/lib/lovable-error-reporting.ts` (telemetria do editor Lovable) e documentos internos da fase anterior.
-- `vite.config.ts` reescrito sem `@lovable.dev/vite-tanstack-config`, usando apenas plugins já presentes (Tailwind, tsconfig-paths, TanStack Start, React) e Nitro com preset `node-server`.
-- Removidas, em `__root.tsx`, a chamada de telemetria do Lovable e a meta `twitter:site @Lovable`.
-- `package.json`: nome do projeto, versão 0.1.0, scripts `start` e `typecheck`, `engines` (Node ≥ 20). Gerenciador passa a ser npm (`package-lock.json`).
-- Nenhuma mudança na lógica da aplicação.
-- Documentação criada: README, `docs/` (funcional, guia do usuário, arquitetura, limitações, roadmap, anotações, diário), CHANGELOG e AGENTS.
-
-**Testes e resultados** (Node 26.13.1, Windows):
-
-- `npm test`: 48/48 testes passando.
-- `npm run typecheck`: sem erros.
-- `npm run lint`: 0 erros (6 avisos em componentes de UI herdados).
-- `npm run build`: OK, saída em `.output/` (preset `node-server`).
-- `npm start`: a página carregou no navegador. Fluxo com os dados de exemplo no modo Auditoria: 40 / 10 / 4 / 6, igual à referência. Visual conferido por captura de tela.
-- `npm run dev`: servidor respondeu HTTP 200 em `http://localhost:8080`.
-- CI no GitHub Actions (Node 22, `npm ci`): typecheck, lint, testes e build com sucesso no primeiro push.
-
-**Organização no GitHub:**
-
-- Labels criadas: `documentação`, `melhoria`, `nova funcionalidade`, `segurança` e `desempenho` (a label `bug` já existia).
-- Issues #1 a #17 abertas a partir das limitações documentadas em `docs/LIMITACOES.md`, todas conferidas no código. Nenhuma marcada como concluída.
-- **GitHub Projects não criado:** a credencial disponível não tem o escopo `project` (erro `INSUFFICIENT_SCOPES` da API). Fica pendente.
+**17/11/2026** — Revisão da documentação, conferida com o código. Avaliação técnica da atualização da biblioteca de planilhas (`xlsx`), aguardando aprovação.

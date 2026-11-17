@@ -34,7 +34,7 @@ Todo o processamento acontece no navegador do usuário.
 
 ## 4. Configuração do cruzamento
 
-- Ao carregar as duas planilhas, colunas com o mesmo nome (ignorando maiúsculas e espaços) são sugeridas automaticamente. O primeiro par vira a chave e os demais viram campos a comparar.
+- Ao carregar as duas planilhas, colunas com o mesmo nome (ignorando maiúsculas e espaços) são sugeridas automaticamente. O primeiro par vira a chave e os demais viram campos a comparar. Se nenhum nome coincidir, a chave começa com a primeira coluna de cada planilha.
 - O usuário pode adicionar ou remover pares e trocar as colunas.
 - **Opções:**
   - _Ignorar maiúsculas/minúsculas_ (padrão: ligada).

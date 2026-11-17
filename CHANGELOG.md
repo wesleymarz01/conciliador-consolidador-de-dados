@@ -11,7 +11,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [0.1.0] - 2026-11-17
 
-Primeira versão do repositório independente. O código parte do protótipo criado no Lovable, já com as correções de confiabilidade da Fase 0.
+Primeira versão do repositório público independente. O código parte de uma versão consolidada durante o desenvolvimento privado, já com as correções de confiabilidade da Fase 0.
 
 ### Funcionalidades existentes nesta versão
 
@@ -31,7 +31,7 @@ Primeira versão do repositório independente. O código parte do protótipo cri
 - Exportação CSV/XLSX e tabela incluem todas as colunas, não só as da primeira linha.
 - Duplicatas e chaves vazias deixaram de ser tratadas em silêncio: vale a 1ª ocorrência, e as demais linhas aparecem em abas próprias. A cobertura do Inventário passa a ser calculada sobre as chaves únicas de A.
 
-### Alterado (independência do Lovable)
+### Alterado (independência operacional do ambiente Lovable)
 
 - `vite.config.ts` reescrito sem `@lovable.dev/vite-tanstack-config`. O build usa Nitro com preset `node-server` (`npm start`).
 - Removidos a telemetria do editor Lovable, a meta `twitter:site @Lovable`, a pasta `.lovable/` e os arquivos do bun.
