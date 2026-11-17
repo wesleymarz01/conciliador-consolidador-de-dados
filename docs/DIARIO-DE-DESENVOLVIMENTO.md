@@ -76,3 +76,10 @@ Histórico das etapas do projeto. **Registre apenas o que pode ser comprovado** 
 - `npm run build`: OK, saída em `.output/` (preset `node-server`).
 - `npm start`: a página carregou no navegador. Fluxo com os dados de exemplo no modo Auditoria: 40 / 10 / 4 / 6, igual à referência. Visual conferido por captura de tela.
 - `npm run dev`: servidor respondeu HTTP 200 em `http://localhost:8080`.
+- CI no GitHub Actions (Node 22, `npm ci`): typecheck, lint, testes e build com sucesso no primeiro push.
+
+**Organização no GitHub:**
+
+- Labels criadas: `documentação`, `melhoria`, `nova funcionalidade`, `segurança` e `desempenho` (a label `bug` já existia).
+- Issues #1 a #17 abertas a partir das limitações documentadas em `docs/LIMITACOES.md`, todas conferidas no código. Nenhuma marcada como concluída.
+- **GitHub Projects não criado:** a credencial disponível não tem o escopo `project` (erro `INSUFFICIENT_SCOPES` da API). Fica pendente.
