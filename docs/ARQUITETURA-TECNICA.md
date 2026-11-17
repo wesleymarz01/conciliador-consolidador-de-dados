@@ -47,15 +47,15 @@ Servidor Node local (npm start) ou Vite (npm run dev)
 
 ## 3. Tecnologias e dependências
 
-| Área      | Tecnologia                             | Uso                                           |
-| --------- | -------------------------------------- | --------------------------------------------- |
-| Interface | React 19, Tailwind CSS 4, Lucide       | Tela e ícones                                 |
-| Framework | TanStack Start 1.168 / Router 1.170    | Rotas, SSR e entrada de servidor              |
-| Build     | Vite 8, Nitro 3 (preset `node-server`) | Desenvolvimento e build local em `.output/`   |
-| Planilhas | SheetJS `xlsx` 0.18.5, PapaParse 5.7   | Leitura de XLSX/XLS/CSV e geração de XLSX/CSV |
-| Linguagem | TypeScript 5.8 (modo estrito)          | —                                             |
-| Testes    | Vitest 4, Testing Library, jsdom       | Testes unitários e de rota                    |
-| Qualidade | ESLint 9, Prettier 3                   | Lint e formatação                             |
+| Área      | Tecnologia                                         | Uso                                           |
+| --------- | -------------------------------------------------- | --------------------------------------------- |
+| Interface | React 19, Tailwind CSS 4, Lucide                   | Tela e ícones                                 |
+| Framework | TanStack Start 1.168 / Router 1.170                | Rotas, SSR e entrada de servidor              |
+| Build     | Vite 8, Nitro 3 (preset `node-server`)             | Desenvolvimento e build local em `.output/`   |
+| Planilhas | SheetJS `xlsx` 0.20.3 (CDN oficial), PapaParse 5.7 | Leitura de XLSX/XLS/CSV e geração de XLSX/CSV |
+| Linguagem | TypeScript 5.8 (modo estrito)                      | —                                             |
+| Testes    | Vitest 4, Testing Library, jsdom                   | Testes unitários e de rota                    |
+| Qualidade | ESLint 9, Prettier 3                               | Lint e formatação                             |
 
 O `package.json` também declara dependências herdadas do modelo inicial (Radix UI, recharts, zod, react-hook-form, date-fns, entre outras) que **não são usadas pela tela atual**. Elas foram mantidas nesta etapa para não alterar o projeto; a remoção está registrada no roadmap.
 
@@ -93,14 +93,14 @@ Arquivo único com o componente `Index` (estado da tela) e os subcomponentes `Dr
 
 ## 6. Testes
 
-| Arquivo                                    | Cobre                                                                                                                       |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `src/lib/reconcile.test.ts`                | Casos básicos do motor (primeiros testes do projeto)                                                                        |
-| `src/lib/reconcile.caracterizacao.test.ts` | Normalização, moeda, hostname, chaves compostas, duplicadas, sem chave e a regra "cada linha em exatamente uma categoria"   |
-| `src/lib/files.test.ts`                    | Leitura de CSV (vírgula, ponto e vírgula, acentos, pular linhas) e de XLSX (abas, consolidação, aba inexistente)            |
-| `src/lib/export.test.ts`                   | Exportação CSV com BOM, união de colunas e proteção contra injeção de fórmulas; valores com `=` gravados como texto no XLSX |
-| `src/lib/sample.test.ts`                   | Resultado de referência dos dados de exemplo (com snapshot)                                                                 |
-| `src/test/app-routing.test.tsx`            | A rota `/` existe                                                                                                           |
+| Arquivo                                    | Cobre                                                                                                                                                                    |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/lib/reconcile.test.ts`                | Casos básicos do motor (primeiros testes do projeto)                                                                                                                     |
+| `src/lib/reconcile.caracterizacao.test.ts` | Normalização, moeda, hostname, chaves compostas, duplicadas, sem chave e a regra "cada linha em exatamente uma categoria"                                                |
+| `src/lib/files.test.ts`                    | Leitura de CSV (vírgula, ponto e vírgula, acentos, pular linhas), de XLSX (abas, consolidação, aba inexistente, formatos de número, data e porcentagem) e de XLS (BIFF8) |
+| `src/lib/export.test.ts`                   | Exportação CSV com BOM, união de colunas e proteção contra injeção de fórmulas; valores com `=` gravados como texto no XLSX                                              |
+| `src/lib/sample.test.ts`                   | Resultado de referência dos dados de exemplo (com snapshot)                                                                                                              |
+| `src/test/app-routing.test.tsx`            | A rota `/` existe                                                                                                                                                        |
 
 **Convenções:**
 

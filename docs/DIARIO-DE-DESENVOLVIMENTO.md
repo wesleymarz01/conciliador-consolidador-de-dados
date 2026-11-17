@@ -17,3 +17,5 @@ Diário de bordo do projeto, do mais antigo para o mais recente. Cada entrada tr
 **17/11/2026** — Correção na exportação CSV. Foi implementada proteção contra fórmulas maliciosas, e 14 testes automatizados novos validam os casos de risco e a preservação de números, acentos e separadores. Resultado: 62 testes aprovados.
 
 **17/11/2026** — Revisão da documentação, conferida com o código. Avaliação técnica da atualização da biblioteca de planilhas (`xlsx`), aguardando aprovação.
+
+**17/11/2026** — Atualização da biblioteca de planilhas (`xlsx`) para uma versão sem as vulnerabilidades conhecidas. A leitura de arquivos `.xlsx` e `.xls` foi conferida e continua igual, com 2 testes novos. Resultado: 64 testes aprovados.
