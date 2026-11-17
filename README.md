@@ -162,11 +162,11 @@ As possibilidades de evolução estão em [ROADMAP](docs/ROADMAP.md). **Nenhum i
 
 ## Origem, autoria e evolução
 
-O Conciliador & Consolidador de Dados foi idealizado e conduzido por [Wesley Martins (@wesleymarz01)](https://github.com/wesleymarz01). Seu desenvolvimento começou em um ambiente privado, antes da decisão de disponibilizar publicamente uma versão independente.
+O Conciliador & Consolidador de Dados foi idealizado e iniciado por [Wesley Martins (@wesleymarz01)](https://github.com/wesleymarz01). Antes da etapa na Lovable, o autor já havia desenvolvido uma primeira versão do projeto em ambiente privado e a compartilhou com o ChatGPT para análise e avaliação do código. Esse trabalho de análise e orientação com IA fez parte do processo desde uma fase inicial, antes da disponibilização da aplicação na Lovable.
 
-Ao longo do processo, ferramentas de inteligência artificial foram utilizadas como apoio em diferentes etapas, incluindo análise do código, orientação técnica, desenvolvimento, revisão e documentação. Esse uso é parte transparente do processo de trabalho; a concepção do projeto, as decisões e a condução do desenvolvimento são de seu autor.
+Ao longo do desenvolvimento, ferramentas de inteligência artificial foram utilizadas como apoio em diferentes etapas, incluindo análise do código, orientação técnica, desenvolvimento, revisão e documentação. Esse uso é parte transparente do processo de trabalho; a concepção do projeto, as decisões e a condução do desenvolvimento são de seu autor.
 
-Uma versão também passou pelo ambiente Lovable, que teve um papel importante na evolução, disponibilização e realização de testes com usuários. A Lovable foi uma ferramenta e um ambiente utilizado durante o percurso, não a origem ou a autora do projeto.
+Posteriormente, uma versão passou pelo ambiente Lovable, que teve um papel importante na evolução, implementação e disponibilização para testes e uso por uma pessoa convidada. A Lovable foi uma ferramenta e um ambiente utilizado durante o percurso, não a origem ou a autora do projeto.
 
 Em 17/11/2026, foi publicado este repositório público independente. Ele parte de uma versão consolidada durante o desenvolvimento privado e inclui adaptações para execução local, independência operacional do ambiente Lovable e documentação própria. O repositório privado foi mantido separado e não é substituído por esta publicação; as duas versões não devem ser consideradas automaticamente sincronizadas ou idênticas.
 
