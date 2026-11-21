@@ -9,6 +9,7 @@ import {
   type ParseOpts,
 } from "@/lib/files";
 import {
+  divergentColumns,
   reconcile,
   suggestPairs,
   type MatchRow,
@@ -711,7 +712,11 @@ function Index() {
                 Exportar .csv
               </button>
             </div>
-            <DataTable rows={rows} tab={tab === "both" ? "identical" : tab} />
+            <DataTable
+              rows={rows}
+              tab={tab === "both" ? "identical" : tab}
+              pairs={ranWith?.cmp ?? []}
+            />
           </section>
         </>
       )}
@@ -958,7 +963,7 @@ function Stat({
 }
 
 const LIMIT = 300;
-function DataTable({ rows, tab }: { rows: Row[]; tab: Tab }) {
+function DataTable({ rows, tab, pairs }: { rows: Row[]; tab: Tab; pairs: Pair[] }) {
   // União das colunas de todas as linhas: linhas "Não Encontrado" ou de abas diferentes
   // podem não ter todas as colunas da primeira linha.
   const cols = useMemo(() => columnsOf(rows), [rows]);
@@ -968,7 +973,8 @@ function DataTable({ rows, tab }: { rows: Row[]; tab: Tab }) {
         Nenhum registro nesta categoria.
       </p>
     );
-  const diffCols = (r: Row) => new Set((r["Campos divergentes"] ?? "").split(", ").filter(Boolean));
+  const diffCols = (r: Row) =>
+    divergentColumns((r["Campos divergentes"] ?? "").split(", ").filter(Boolean), pairs);
   const rowTone =
     tab === "identical"
       ? "border-l-success"
@@ -999,8 +1005,7 @@ function DataTable({ rows, tab }: { rows: Row[]; tab: Tab }) {
                 className={`border-l-2 border-t border-border ${r["Match Status"] ? (r["Match Status"] === "Encontrado" ? "border-l-success" : "border-l-destructive") : rowTone} hover:bg-muted/30`}
               >
                 {cols.map((c) => {
-                  const base = c.replace(/ \((A|B)\)$/, "");
-                  const bad = tab === "divergent" && d.has(base) && c !== "Chave";
+                  const bad = tab === "divergent" && d.has(c);
                   return (
                     <td
                       key={c}
