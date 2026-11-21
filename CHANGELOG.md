@@ -5,6 +5,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [Não lançado]
 
+### Corrigido
+
+- [M8] Cabeçalhos repetidos não sobrescrevem mais outra coluna: em `X, X, X_2`, a segunda `X` vira `X_3` (antes virava `X_2` e os dados de uma das colunas se perdiam sem aviso). Cabeçalhos originais mantêm o nome. 2 testes automatizados novos.
+
 ### Segurança
 
 - Exportação CSV protegida contra injeção de fórmulas (CSV injection): valores e cabeçalhos iniciados por `=`, `+`, `-`, `@`, tabulação ou retorno de carro recebem um apóstrofo no início. Números simples (`-10`, `+5`) são preservados. 14 testes automatizados novos.

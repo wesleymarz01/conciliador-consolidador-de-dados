@@ -29,7 +29,7 @@ Todo o processamento acontece no navegador do usuário.
 - **CSV:** o separador é detectado automaticamente e o arquivo é lido como texto UTF-8.
 - **Excel:** por padrão é lida a primeira aba. O usuário pode escolher outra aba ou **"Todas as abas (consolidar)"**, que junta as linhas de todas as abas numa única base, com a união das colunas e a coluna adicional `Aba_Origem` (nome da aba de cada linha). Os valores são lidos como texto formatado, como aparecem no Excel.
 - **Pular linhas iniciais:** descarta de 0 a 50 linhas antes do cabeçalho (ex.: títulos de relatório).
-- **Cabeçalho:** a primeira linha não vazia restante. Cabeçalhos vazios viram `Coluna N`; cabeçalhos repetidos recebem sufixo (`Nome_2`).
+- **Cabeçalho:** a primeira linha não vazia restante. Cabeçalhos vazios viram `Coluna N`; cabeçalhos repetidos recebem sufixo (`Nome_2`, `Nome_3`...), sem repetir o nome de outra coluna existente (em `X, X, X_2`, a segunda `X` vira `X_3`).
 - **Limpeza:** espaços nas pontas das células são removidos; linhas totalmente vazias e colunas sem nenhum valor são descartadas.
 
 ## 4. Configuração do cruzamento
