@@ -84,6 +84,8 @@ function Index() {
   const [fileA, setFileA] = useState<File | null>(null);
   const [fileB, setFileB] = useState<File | null>(null);
   const [result, setResult] = useState<Result | null>(null);
+  // Campos e modo usados no último cruzamento: a exibição segue o resultado, não a tela atual.
+  const [ranWith, setRanWith] = useState<{ cmp: Pair[]; fuzzy: boolean; sig: string } | null>(null);
   const [tab, setTab] = useState<Tab>("divergent");
   const [q, setQ] = useState("");
   const [hasKey, setHasKey] = useState(false);
@@ -161,7 +163,7 @@ function Index() {
         chave: m.key,
         diffs: Object.fromEntries(
           m.diffs.map((d) => {
-            const c = cmp.find((p) => p.a === d);
+            const c = ranWith?.cmp.find((p) => p.a === d);
             return [d, { A: m.a[d], B: c ? m.b[c.b] : "" }];
           }),
         ),
@@ -204,13 +206,21 @@ function Index() {
     }
   };
 
+  // Configuração efetiva do cruzamento. A assinatura compara a atual com a do último
+  // cruzamento para avisar quando o resultado exibido ficou desatualizado.
+  const runCmp = inv ? [] : cmp;
+  const runOpts = {
+    ...opts,
+    stripDomain: inv && opts.stripDomain,
+    fuzzy: fuzzy ? minSim : undefined,
+  };
+  const cfgSig = JSON.stringify({ keys, cmp: runCmp, opts: runOpts });
+  const stale = !!result && !!ranWith && ranWith.sig !== cfgSig;
+
   const run = () => {
     if (!A || !B || !keys.length) return;
-    const r = reconcile(A.rows, B.rows, keys, inv ? [] : cmp, {
-      ...opts,
-      stripDomain: inv && opts.stripDomain,
-      fuzzy: fuzzy ? minSim : undefined,
-    });
+    const r = reconcile(A.rows, B.rows, keys, runCmp, runOpts);
+    setRanWith({ cmp: runCmp, fuzzy, sig: cfgSig });
     setResult(r);
     setDiag("");
     setTab(inv ? "both" : r.divergent.length ? "divergent" : "identical");
@@ -235,6 +245,8 @@ function Index() {
 
   const rows = useMemo<Record<string, string>[]>(() => {
     if (!result) return [];
+    const fuzzy = ranWith?.fuzzy ?? false,
+      cmp = ranWith?.cmp ?? [];
     let list: Record<string, string>[];
     const la = nameA || "A",
       lb = nameB || "B";
@@ -287,7 +299,7 @@ function Index() {
     if (!q) return list;
     const s = q.toLowerCase();
     return list.filter((r) => Object.values(r).some((v) => String(v).toLowerCase().includes(s)));
-  }, [result, tab, cmp, q, nameA, nameB, fuzzy, A]);
+  }, [result, ranWith, tab, q, nameA, nameB, A]);
 
   const matched = result ? result.identical.length + result.divergent.length : 0;
   const pct =
@@ -540,6 +552,23 @@ function Index() {
 
       {result && (
         <>
+          {stale && (
+            <div
+              role="status"
+              className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-warning/50 bg-warning/10 px-4 py-3 text-sm"
+            >
+              <span>
+                A configuração mudou depois do último cruzamento. O resultado abaixo ainda
+                corresponde à configuração anterior.
+              </span>
+              <button
+                onClick={run}
+                className="rounded-lg border border-warning/60 px-3 py-1.5 font-medium transition hover:bg-warning/20"
+              >
+                Cruzar novamente
+              </button>
+            </div>
+          )}
           {inv ? (
             <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
               <Stat
