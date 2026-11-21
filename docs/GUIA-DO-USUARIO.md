@@ -53,6 +53,7 @@ Trocar de modo apaga o resultado atual. Depois basta clicar em **Cruzar dados** 
 1. Clique em **Cruzar dados**.
 2. Leia os **indicadores** no topo (totais, presentes em ambas ou % de conciliação, divergentes).
 3. Se aparecer um **aviso amarelo** sobre linhas fora do cruzamento, confira as abas **Duplicadas** e **Sem chave**. São linhas com a chave repetida (só a primeira foi usada) ou com a chave em branco.
+   Se você mudar chaves, campos ou opções depois de cruzar, aparece o aviso **"A configuração mudou depois do último cruzamento"**: o resultado na tela ainda é o da configuração anterior. Clique em **Cruzar novamente** para atualizar.
 4. Navegue pelas abas:
    - Inventário: _Presentes em ambas_, _Só em B_, _Só em A_ e _Visão completa_ (todas as linhas de A com o status de cada uma).
    - Auditoria: _Idênticos_, _Divergências_ (com os campos diferentes destacados e listados), _Apenas na A_ e _Apenas na B_.

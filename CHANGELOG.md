@@ -5,6 +5,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ## [Não lançado]
 
+### Corrigido
+
+- [M2] Resultado desatualizado agora é sinalizado: mudar chaves, campos ou opções depois de cruzar mostra um aviso com o botão "Cruzar novamente". As abas, o diagnóstico com IA e a exportação seguem a configuração usada no cruzamento, sem misturar colunas da configuração atual com dados antigos.
+
 ### Segurança
 
 - Exportação CSV protegida contra injeção de fórmulas (CSV injection): valores e cabeçalhos iniciados por `=`, `+`, `-`, `@`, tabulação ou retorno de carro recebem um apóstrofo no início. Números simples (`-10`, `+5`) são preservados. 14 testes automatizados novos.
