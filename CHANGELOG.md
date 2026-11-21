@@ -7,6 +7,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 
 ### Corrigido
 
+- [M8] Cabeçalhos repetidos não sobrescrevem mais outra coluna: em `X, X, X_2`, a segunda `X` vira `X_3` (antes virava `X_2` e os dados de uma das colunas se perdiam sem aviso). Cabeçalhos originais mantêm o nome. 2 testes automatizados novos.
 - [M2] Resultado desatualizado agora é sinalizado: mudar chaves, campos ou opções depois de cruzar mostra um aviso com o botão "Cruzar novamente". As abas, o diagnóstico com IA e a exportação seguem a configuração usada no cruzamento, sem misturar colunas da configuração atual com dados antigos.
 
 ### Segurança
