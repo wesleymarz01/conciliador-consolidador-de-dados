@@ -20,11 +20,20 @@ export interface ParseOpts {
 export function matrixToRows(m: unknown[][], skip = 0): { columns: string[]; rows: Row[] } {
   const data = m.slice(skip).filter((r) => r.some((v) => String(v ?? "").trim() !== ""));
   const head = (data[0] ?? []).map((h, i) => String(h ?? "").trim() || `Coluna ${i + 1}`);
-  const seen = new Map<string, number>();
+  // Repetidos recebem sufixo (_2, _3...) que não colide com nenhum cabeçalho real:
+  // em "X, X, X_2" a segunda coluna vira "X_3", em vez de sobrescrever "X_2".
+  const taken = new Set(head);
+  const seen = new Set<string>();
   const cols = head.map((h) => {
-    const n = (seen.get(h) ?? 0) + 1;
-    seen.set(h, n);
-    return n > 1 ? `${h}_${n}` : h;
+    if (!seen.has(h)) {
+      seen.add(h);
+      return h;
+    }
+    let n = 2;
+    while (taken.has(`${h}_${n}`)) n++;
+    const name = `${h}_${n}`;
+    taken.add(name);
+    return name;
   });
   const rows = data
     .slice(1)

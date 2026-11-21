@@ -12,7 +12,6 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 ## Leitura de arquivos
 
 - **[M10] Codificação de CSV:** sempre lido como UTF-8. Arquivos em Windows-1252/ANSI exibem acentos incorretos e podem gerar falsas divergências.
-- **[M8] Cabeçalhos repetidos:** `X, X, X_2` resulta em duas colunas `X_2`, e uma sobrescreve a outra.
 - **[M9] Colunas sem valores:** colunas que só têm cabeçalho são descartadas e não podem ser escolhidas.
 - **Consolidação de abas:** o mesmo "pular linhas" vale para todas as abas, e a coluna `Aba_Origem` pode colidir com uma coluna de mesmo nome.
 - **Datas e números do Excel:** são lidos como texto formatado. O mesmo valor em formatos diferentes (ex.: `05/01/2024` × `2024-01-05`) é considerado diferente.
