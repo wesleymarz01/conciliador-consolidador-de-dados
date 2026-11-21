@@ -12,7 +12,6 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 ## Leitura de arquivos
 
 - **[M10] Codificação de CSV:** sempre lido como UTF-8. Arquivos em Windows-1252/ANSI exibem acentos incorretos e podem gerar falsas divergências.
-- **[M8] Cabeçalhos repetidos:** `X, X, X_2` resulta em duas colunas `X_2`, e uma sobrescreve a outra.
 - **[M9] Colunas sem valores:** colunas que só têm cabeçalho são descartadas e não podem ser escolhidas.
 - **Consolidação de abas:** o mesmo "pular linhas" vale para todas as abas, e a coluna `Aba_Origem` pode colidir com uma coluna de mesmo nome.
 - **Datas e números do Excel:** são lidos como texto formatado. O mesmo valor em formatos diferentes (ex.: `05/01/2024` × `2024-01-05`) é considerado diferente.
@@ -22,7 +21,6 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 
 - **[B1] Sem paginação:** a tabela mostra até 300 linhas por aba. Para ver tudo, é preciso exportar.
 - **[M1] Configuração refeita:** trocar a aba ou "pular linhas" refaz a sugestão de colunas e descarta os pares escolhidos.
-- **[M2] Resultado não é marcado como desatualizado:** mudar chaves, campos ou opções depois de cruzar não avisa que o resultado é antigo. Nas abas da Auditoria, as colunas exibidas seguem os campos atuais.
 - **[M3] Destaque de divergência:** quando os nomes das colunas de A e B são diferentes, a célula divergente de B não é destacada.
 - **[M4] Nomes reservados:** colunas chamadas `Chave` ou `Match Status` são sobrescritas na exibição e na exportação.
 - **[B2] Celular e acessibilidade:** o botão de inverter A ↔ B não aparece em telas pequenas, e a área de upload não é acessível pelo teclado.

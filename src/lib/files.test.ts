@@ -82,6 +82,22 @@ describe("matrixToRows", () => {
     ]);
     expect(r.columns).toEqual(["a", "Coluna 2", "a_2"]);
   });
+  it("sufixo de repetido não colide com cabeçalho existente (X, X, X_2)", () => {
+    const r = matrixToRows([
+      ["X", "X", "X_2"],
+      ["1", "2", "3"],
+    ]);
+    expect(r.columns).toEqual(["X", "X_3", "X_2"]);
+    expect(r.rows).toEqual([{ X: "1", X_3: "2", X_2: "3" }]);
+  });
+  it("sufixo de repetido não colide com nome gerado para cabeçalho vazio", () => {
+    const r = matrixToRows([
+      ["Coluna 2", "", "Coluna 2"],
+      ["1", "2", "3"],
+    ]);
+    expect(new Set(r.columns).size).toBe(3);
+    expect(Object.values(r.rows[0]!)).toEqual(["1", "2", "3"]);
+  });
   it("hoje: remove colunas sem nenhum valor", () => {
     expect(
       matrixToRows([
