@@ -24,7 +24,6 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 - **[M3] Destaque de divergência:** quando os nomes das colunas de A e B são diferentes, a célula divergente de B não é destacada.
 - **[M4] Nomes reservados:** colunas chamadas `Chave` ou `Match Status` são sobrescritas na exibição e na exportação.
 - **[B2] Celular e acessibilidade:** o botão de inverter A ↔ B não aparece em telas pequenas, e a área de upload não é acessível pelo teclado.
-- **[B4] Páginas de erro e 404 em inglês.**
 - O diagnóstico com IA só existe no modo Auditoria.
 
 ## Desempenho
