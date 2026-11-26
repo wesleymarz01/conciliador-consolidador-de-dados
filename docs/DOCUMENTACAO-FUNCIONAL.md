@@ -26,8 +26,8 @@ Todo o processamento acontece no navegador do usuário.
 ## 3. Leitura dos arquivos
 
 - **Formatos:** `.xlsx`, `.xls` e `.csv`.
-- **CSV:** o separador é detectado automaticamente e o arquivo é lido como texto UTF-8.
-- **Excel:** por padrão é lida a primeira aba. O usuário pode escolher outra aba ou **"Todas as abas (consolidar)"**, que junta as linhas de todas as abas numa única base, com a união das colunas e a coluna adicional `Aba_Origem` (nome da aba de cada linha). Os valores são lidos como texto formatado, como aparecem no Excel.
+- **CSV:** o separador é detectado automaticamente e o arquivo é lido como texto UTF-8. Valores além da largura do cabeçalho viram colunas `Coluna N`, em vez de serem descartados. Arquivos com aspas malformadas (aspa aberta sem fechamento, ou aspa solta dentro de um campo entre aspas, como `"5" tv"`) são **recusados**, porque juntariam várias linhas numa só célula. Aspas no meio de campos sem aspas (`O"Brien`), aspas escapadas (`""`) e quebras de linha dentro de aspas são aceitas.
+- **Excel:** por padrão é lida a primeira aba. O usuário pode escolher outra aba ou **"Todas as abas (consolidar)"**, que junta as linhas de todas as abas numa única base, com a união das colunas e a coluna adicional `Aba_Origem` (nome da aba de cada linha). Os valores são lidos como texto formatado, como aparecem no Excel. Exceção: números inteiros que o Excel exibiria em notação científica (ex.: um CNPJ de 14 dígitos guardado como número aparece como `1.23457E+13`) são lidos com todos os dígitos.
 - **Pular linhas iniciais:** descarta de 0 a 50 linhas antes do cabeçalho (ex.: títulos de relatório).
 - **Cabeçalho:** a primeira linha não vazia restante. Cabeçalhos vazios viram `Coluna N`; cabeçalhos repetidos recebem sufixo (`Nome_2`, `Nome_3`...), sem repetir o nome de outra coluna existente (em `X, X, X_2`, a segunda `X` vira `X_3`).
 - **Limpeza:** espaços nas pontas das células são removidos; linhas totalmente vazias e colunas sem nenhum valor são descartadas.
@@ -80,6 +80,8 @@ A equivalência numérica **não** vale para as chaves: `007` e `7` são chaves 
 
 Abas: _Presentes em ambas_, _Só em B_, _Só em A_ e _Visão completa_. A Visão completa traz todas as linhas de A com `Match Status` = Encontrado, Não Encontrado, Chave duplicada ou Sem chave, mais as colunas de B quando encontrado.
 
+Nas abas _Presentes em ambas_ e _Visão completa_, cada coluna recebe o nome da planilha de origem como sufixo (ex.: `Valor (Homologação)`). Se os nomes de A e B forem iguais, os sufixos passam a ser `(A)` e `(B)`, para que as colunas de B não sobrescrevam as de A.
+
 ### Modo Auditoria
 
 | Indicador           | Cálculo                                                                                   |
@@ -89,6 +91,8 @@ Abas: _Presentes em ambas_, _Só em B_, _Só em A_ e _Visão completa_. A Visão
 | Divergentes         | Pares com pelo menos um campo diferente; o subtítulo mostra quantos registros não têm par |
 
 Abas: _Idênticos_, _Divergências_, _Apenas na A_ e _Apenas na B_. Nas divergências, as células diferentes são destacadas.
+
+As abas _Idênticos_ e _Divergências_ trazem a `Chave` normalizada (ex.: em minúsculas), a `Semelhança (%)` na estratégia Aproximada, os valores originais das colunas-chave de A e de B e, em seguida, os campos comparados, no formato `Coluna (A)` / `Coluna (B)`.
 
 Nos dois modos, as abas _Duplicadas em A/B_ e _Sem chave em A/B_ aparecem quando existem casos, junto com um aviso.
 

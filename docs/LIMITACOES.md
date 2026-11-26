@@ -15,7 +15,9 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 - **[M9] Colunas sem valores:** colunas que só têm cabeçalho são descartadas e não podem ser escolhidas.
 - **Consolidação de abas:** o mesmo "pular linhas" vale para todas as abas, e a coluna `Aba_Origem` pode colidir com uma coluna de mesmo nome.
 - **Datas e números do Excel:** são lidos como texto formatado. O mesmo valor em formatos diferentes (ex.: `05/01/2024` × `2024-01-05`) é considerado diferente.
-- **Mensagem de erro genérica:** quando um arquivo não pode ser lido, o motivo real não é exibido.
+- **Inteiros muito longos no Excel:** inteiros acima de 2^53 (cerca de 9 quatrilhões, 16 dígitos ou mais) continuam sendo lidos em notação científica (ex.: `1.23457E+16`), e valores diferentes podem virar a mesma chave. Para códigos longos, guarde a coluna como texto no Excel. Uma célula inteira com formato científico escolhido de propósito (ex.: `0.00E+00`) é lida com o número completo.
+- **CSV com aspas malformadas:** o arquivo inteiro é recusado, mesmo que o problema esteja numa única célula (ex.: `"5" tv"`). É preciso corrigir as aspas no arquivo antes de carregar.
+- **Mensagem de erro genérica:** quando um arquivo não pode ser lido, o motivo real não é exibido (inclusive na recusa por aspas malformadas).
 
 ## Interface e usabilidade
 
@@ -24,6 +26,7 @@ Lista honesta do que **não funciona bem** ou **não existe** na versão atual. 
 - **[M4] Nomes reservados:** colunas chamadas `Chave` ou `Match Status` são sobrescritas na exibição e na exportação.
 - **[B2] Celular e acessibilidade:** o botão de inverter A ↔ B não aparece em telas pequenas, e a área de upload não é acessível pelo teclado.
 - O diagnóstico com IA só existe no modo Auditoria.
+- **Nomes iguais para A e B:** no modo Inventário, as colunas usam os sufixos `(A)` e `(B)`, mas os nomes das abas e dos indicadores continuam iguais (ex.: duas abas "Só em Sistema").
 
 ## Desempenho
 
