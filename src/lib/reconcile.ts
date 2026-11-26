@@ -213,3 +213,12 @@ export function suggestPairs(colsA: string[], colsB: string[]): Pair[] {
     return m ? [{ a: c, b: m }] : [];
   });
 }
+
+/**
+ * Nomes das colunas exibidas na aba Divergências (`<a> (A)` e `<b> (B)`) que devem
+ * ser destacadas. `diffs` guarda só os nomes de A; o nome de B vem do par comparado.
+ */
+export function divergentColumns(diffs: string[], pairs: Pair[]): Set<string> {
+  const d = new Set(diffs);
+  return new Set(pairs.filter((p) => d.has(p.a)).flatMap((p) => [`${p.a} (A)`, `${p.b} (B)`]));
+}
