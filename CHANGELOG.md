@@ -11,6 +11,11 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); 
 - [M2] Resultado desatualizado agora é sinalizado: mudar chaves, campos ou opções depois de cruzar mostra um aviso com o botão "Cruzar novamente". As abas, o diagnóstico com IA e a exportação seguem a configuração usada no cruzamento, sem misturar colunas da configuração atual com dados antigos.
 - [B4] Páginas 404 e de erro traduzidas para o português (`lang="pt-BR"` também na página de erro do servidor).
 - [M3] Na aba Divergências, a célula divergente da planilha B agora é destacada mesmo quando a coluna de B tem nome diferente da de A. 4 testes automatizados novos.
+- CSV com linhas mais longas que o cabeçalho: os valores excedentes viram colunas `Coluna N` em vez de serem descartados sem aviso (no Excel isso já acontecia). 1 teste novo.
+- CSV com aspas sem fechamento agora é recusado. Antes, o resto do arquivo era juntado numa única célula e as linhas seguintes se perdiam sem aviso. 1 teste novo.
+- Excel: inteiros longos no formato Geral (ex.: CNPJ de 14 dígitos guardado como número) são lidos com todos os dígitos. Antes viravam `1.23457E+13`, e chaves diferentes ficavam iguais. 1 teste novo.
+- Rótulos iguais para A e B (ex.: os dois "Sistema") não fazem mais as colunas de B sobrescreverem as de A nas abas "Presentes em ambas" e "Visão completa": nesse caso, as colunas usam os sufixos `(A)` e `(B)`.
+- Abas Idênticos e Divergências (tela e exportação) agora trazem os valores originais das colunas-chave de A e de B e, na estratégia Aproximada, a "Semelhança (%)". Antes só aparecia a `Chave` normalizada (ex.: em minúsculas).
 
 ### Segurança
 

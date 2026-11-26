@@ -86,7 +86,12 @@ function Index() {
   const [fileB, setFileB] = useState<File | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   // Campos e modo usados no último cruzamento: a exibição segue o resultado, não a tela atual.
-  const [ranWith, setRanWith] = useState<{ cmp: Pair[]; fuzzy: boolean; sig: string } | null>(null);
+  const [ranWith, setRanWith] = useState<{
+    keys: Pair[];
+    cmp: Pair[];
+    fuzzy: boolean;
+    sig: string;
+  } | null>(null);
   const [tab, setTab] = useState<Tab>("divergent");
   const [q, setQ] = useState("");
   const [hasKey, setHasKey] = useState(false);
@@ -221,7 +226,7 @@ function Index() {
   const run = () => {
     if (!A || !B || !keys.length) return;
     const r = reconcile(A.rows, B.rows, keys, runCmp, runOpts);
-    setRanWith({ cmp: runCmp, fuzzy, sig: cfgSig });
+    setRanWith({ keys, cmp: runCmp, fuzzy, sig: cfgSig });
     setResult(r);
     setDiag("");
     setTab(inv ? "both" : r.divergent.length ? "divergent" : "identical");
@@ -249,8 +254,10 @@ function Index() {
     const fuzzy = ranWith?.fuzzy ?? false,
       cmp = ranWith?.cmp ?? [];
     let list: Record<string, string>[];
-    const la = nameA || "A",
-      lb = nameB || "B";
+    // Rótulos iguais dariam o mesmo nome às colunas de A e B, e B sobrescreveria A.
+    const same = (nameA || "A") === (nameB || "B");
+    const la = same ? "A" : nameA || "A",
+      lb = same ? "B" : nameB || "B";
     const merged = (m: MatchRow) => {
       const o: Record<string, string> = { "Match Status": "Encontrado", Chave: m.key };
       if (fuzzy) o["Semelhança (%)"] = m.score === undefined ? "100" : String(m.score);
@@ -290,7 +297,9 @@ function Index() {
     } else
       list = result[tab].map((m) => {
         const o: Record<string, string> = { Chave: m.key };
-        for (const c of cmp) {
+        if (fuzzy) o["Semelhança (%)"] = m.score === undefined ? "100" : String(m.score);
+        // A Chave é normalizada (ex.: minúsculas); as colunas-chave trazem os valores originais.
+        for (const c of [...(ranWith?.keys ?? []), ...cmp]) {
           o[`${c.a} (A)`] = m.a[c.a] ?? "";
           o[`${c.b} (B)`] = m.b[c.b] ?? "";
         }

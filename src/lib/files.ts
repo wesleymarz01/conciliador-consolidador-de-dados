@@ -19,7 +19,13 @@ export interface ParseOpts {
 /** Converte matriz (linhas x colunas) em objetos, pulando linhas iniciais e removendo linhas/colunas vazias. */
 export function matrixToRows(m: unknown[][], skip = 0): { columns: string[]; rows: Row[] } {
   const data = m.slice(skip).filter((r) => r.some((v) => String(v ?? "").trim() !== ""));
-  const head = (data[0] ?? []).map((h, i) => String(h ?? "").trim() || `Coluna ${i + 1}`);
+  // A largura é a da linha mais longa: no CSV, valores além do cabeçalho viram "Coluna N"
+  // em vez de serem descartados (no Excel a matriz já vem com a largura da aba).
+  const width = data.reduce((w, r) => Math.max(w, r.length), 0);
+  const head = Array.from(
+    { length: width },
+    (_, i) => String(data[0]?.[i] ?? "").trim() || `Coluna ${i + 1}`,
+  );
   // Repetidos recebem sufixo (_2, _3...) que não colide com nenhum cabeçalho real:
   // em "X, X, X_2" a segunda coluna vira "X_3", em vez de sobrescrever "X_2".
   const taken = new Set(head);
@@ -49,12 +55,29 @@ export async function parseFile(file: File, o: ParseOpts = {}): Promise<Sheet> {
   const skip = o.skip ?? 0;
   if (file.name.toLowerCase().endsWith(".csv")) {
     const r = Papa.parse<string[]>(await file.text(), { skipEmptyLines: true });
+    // Aspas sem fechamento juntam linhas seguintes numa única célula: recusa em vez de
+    // perder linhas sem aviso. Com outra aspa adiante, o PapaParse acusa InvalidQuotes.
+    if (r.errors.some((e) => e.code === "MissingQuotes" || e.code === "InvalidQuotes"))
+      throw new Error("CSV com aspas sem fechamento");
     return { name: file.name, ...matrixToRows(r.data, skip), skip };
   }
   const wb = XLSX.read(await file.arrayBuffer(), { type: "array" });
   const names = wb.SheetNames;
-  const read = (n: string) =>
-    XLSX.utils.sheet_to_json<unknown[]>(wb.Sheets[n]!, { header: 1, defval: "", raw: false });
+  const read = (n: string) => {
+    const ws = wb.Sheets[n]!;
+    // No formato Geral, inteiros longos viram "1.23457E+13" no texto formatado, e chaves
+    // diferentes ficariam iguais. Para eles, usa o número completo.
+    for (const [ref, c] of Object.entries(ws) as [string, XLSX.CellObject][])
+      if (
+        ref[0] !== "!" &&
+        c.t === "n" &&
+        (!c.z || c.z === "General") &&
+        Number.isSafeInteger(c.v) &&
+        /^-?\d+(\.\d+)?E[+-]\d+$/i.test(c.w ?? "")
+      )
+        c.w = String(c.v);
+    return XLSX.utils.sheet_to_json<unknown[]>(ws, { header: 1, defval: "", raw: false });
+  };
   const sheet = o.sheet ?? names[0] ?? "";
   if (sheet === ALL_SHEETS) {
     const cols: string[] = [];
